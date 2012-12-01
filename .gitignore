@@ -33,3 +33,5 @@ src/plone.app.tiles/
 src/plone.scale/
 src/plone.tiles/
 var/
+src/openmultimedia.*
+src/collective.*

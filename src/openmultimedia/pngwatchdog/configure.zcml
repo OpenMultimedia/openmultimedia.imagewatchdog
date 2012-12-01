@@ -3,8 +3,10 @@
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="openmultimedia.pngwatchdog">
 
+  <includeDependencies package="." />
   <five:registerPackage package="." initialize=".initialize" />
 
   <genericsetup:registerProfile
@@ -14,6 +16,24 @@
       description="Installs the openmultimedia.pngwatchdog package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-  <!-- -*- extra stuff goes here -*- -->
+
+  <browser:page
+      name="pngwatchdog-controlpanel"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".configlet.PNGWatchDogControlPanel"
+      permission="cmf.ManagePortal"
+      />
+
+  <subscriber
+      for="Products.ATContentTypes.interfaces.IATImage
+           zope.container.interfaces.IObjectAddedEvent"
+      handler=".subscribers.image_convert"
+      />
+
+  <subscriber
+      for="Products.ATContentTypes.interfaces.IATImage
+           zope.container.interfaces.IObjectModifiedEvent"
+      handler=".subscribers.image_convert"
+      />
   
 </configure>

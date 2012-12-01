@@ -1,9 +1,26 @@
+import urllib2
+from StringIO import StringIO
+from PIL import Image
 from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import applyProfile
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import IntegrationTesting
+from plone.app.testing import FunctionalTesting
 
 from zope.configuration import xmlconfig
+
+
+def generate_jpeg(width, height):
+    url = 'http://lorempixel.com/%d/%d/' % (width, height)
+    return urllib2.urlopen(url).read()
+
+
+def generate_gif(width, height):
+    jpeg = generate_jpeg(width, height)
+    im = Image.open(StringIO(jpeg))
+    output = StringIO()
+    im.save(output, format='GIF')
+    return output.getvalue()
 
 
 class OpenmultimediapngwatchdogLayer(PloneSandboxLayer):
@@ -26,4 +43,7 @@ class OpenmultimediapngwatchdogLayer(PloneSandboxLayer):
         applyProfile(portal, 'openmultimedia.pngwatchdog:default')
 
 OPENMULTIMEDIA_PNGWATCHDOG_FIXTURE = OpenmultimediapngwatchdogLayer()
-OPENMULTIMEDIA_PNGWATCHDOG_INTEGRATION_TESTING = IntegrationTesting(bases=(OPENMULTIMEDIA_PNGWATCHDOG_FIXTURE,), name="OpenmultimediapngwatchdogLayer:Integration")
+OPENMULTIMEDIA_PNGWATCHDOG_INTEGRATION_TESTING = IntegrationTesting(bases=(OPENMULTIMEDIA_PNGWATCHDOG_FIXTURE,),
+                                                                    name="OpenmultimediapngwatchdogLayer:Integration")
+OPENMULTIMEDIA_PNGWATCHDOG_FUNCTIONAL_TESTING = FunctionalTesting(bases=(OPENMULTIMEDIA_PNGWATCHDOG_FIXTURE,),
+                                                                  name="OpenmultimediapngwatchdogLayer:Functional")

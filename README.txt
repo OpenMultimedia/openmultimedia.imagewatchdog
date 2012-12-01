@@ -21,7 +21,7 @@ Configure
 - Select 'PNG WatchDog'
 - Select the files formats that should be converted to PNG
 - You can choose to optimize the PNG file checking the 'Optimize PNG' checkbox
-- Activate the on-fly convertion checking the 'Activate' checkbox
+- Activate the on-fly convertion checking the 'Enabled' checkbox
 
 Migrate images
 ^^^^^^^^^^^^^^
