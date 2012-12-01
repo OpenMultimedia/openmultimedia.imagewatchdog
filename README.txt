@@ -2,7 +2,8 @@
 openmultimedia.pngwatchdog
 **************************
 
-.. contents:: Table of Contents
+.. contents:: Table of Content
+
 
 Life, the Universe, and Everything
 ----------------------------------
