@@ -2,7 +2,8 @@
 openmultimedia.pngwatchdog
 **************************
 
-.. contents:: Table of Contents
+.. contents:: Table of Content
+
 
 Life, the Universe, and Everything
 ----------------------------------
@@ -33,8 +34,8 @@ Migrate images
 Mostly Harmless
 ---------------
 
-.. image:: https://secure.travis-ci.org/OpenMultimedia/openmultimedia.pngwatchdog.png
-    :target: http://travis-ci.org/OpenMultimedia/openmultimedia.pngwatchdog
+.. image:: https://secure.travis-ci.org/jpgimenez/openmultimedia.pngwatchdog.png
+    :target: http://travis-ci.org/jpgimenez/openmultimedia.pngwatchdog
 
 Have an idea? Found a bug? Let us know by `opening a support ticket`_.
 
