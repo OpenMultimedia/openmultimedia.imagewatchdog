@@ -58,3 +58,19 @@ class TestConfiglet(unittest.TestCase):
         for i in range(IMAGES_RANGE):
             im = Image.open(StringIO(self.portal['test_jpeg_image%s' % i].getImage()))
             self.assertEqual(im.format, 'PNG')
+
+#    from profilehooks import timecall
+#    @timecall
+    def test_migration_with_threshold(self):
+        """ Migrate images to PNG
+        """
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(IPNGWatchDogSettings)
+        settings.enabled = True
+        settings.threshold = 1
+
+        migrate_images(self.portal)
+
+        for i in range(IMAGES_RANGE):
+            im = Image.open(StringIO(self.portal['test_jpeg_image%s' % i].getImage()))
+            self.assertEqual(im.format, 'PNG')
