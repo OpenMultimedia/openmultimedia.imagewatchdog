@@ -42,8 +42,25 @@ class OpenmultimediapngwatchdogLayer(PloneSandboxLayer):
     def setUpPloneSite(self, portal):
         applyProfile(portal, 'openmultimedia.pngwatchdog:default')
 
+
+class OpenmultimediapngwatchdogUnistalledLayer(PloneSandboxLayer):
+
+    defaultBases = (PLONE_FIXTURE,)
+
+    def setUpZope(self, app, configurationContext):
+        # Load ZCML
+        import openmultimedia.pngwatchdog
+        xmlconfig.file('configure.zcml', openmultimedia.pngwatchdog, context=configurationContext)
+
+    def setUpPloneSite(self, portal):
+        pass
+
+
 OPENMULTIMEDIA_PNGWATCHDOG_FIXTURE = OpenmultimediapngwatchdogLayer()
+OPENMULTIMEDIA_PNGWATCHDOG_UNINSTALLED_FIXTURE = OpenmultimediapngwatchdogUnistalledLayer()
 OPENMULTIMEDIA_PNGWATCHDOG_INTEGRATION_TESTING = IntegrationTesting(bases=(OPENMULTIMEDIA_PNGWATCHDOG_FIXTURE,),
                                                                     name="OpenmultimediapngwatchdogLayer:Integration")
+OPENMULTIMEDIA_PNGWATCHDOG_UNINSTALLED_INTEGRATION_TESTING = IntegrationTesting(bases=(OPENMULTIMEDIA_PNGWATCHDOG_UNINSTALLED_FIXTURE,),
+                                                                                name="OpenmultimediapngwatchdogLayer:UninstalledIntegration")
 OPENMULTIMEDIA_PNGWATCHDOG_FUNCTIONAL_TESTING = FunctionalTesting(bases=(OPENMULTIMEDIA_PNGWATCHDOG_FIXTURE,),
                                                                   name="OpenmultimediapngwatchdogLayer:Functional")

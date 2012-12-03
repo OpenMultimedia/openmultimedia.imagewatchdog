@@ -13,9 +13,7 @@ def image_convert(context, event):
         return
     registry = getUtility(IRegistry)
     settings = registry.forInterface(IPNGWatchDogSettings, None)
-    if not settings:
-        return
-    if not settings.enabled:
+    if not settings or not settings.enabled:
         return
     im = Image.open(StringIO(orig))
     if im.format == 'PNG' or \

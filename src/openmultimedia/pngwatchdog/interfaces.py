@@ -54,7 +54,7 @@ class IPNGWatchDogSettings(Interface):
     threshold = schema.Int(
         title=_(u"Transaction threshold"),
         description=_(u"Migrating images in one single transaction could " \
-                       "be a RAM intensive process. This value is the " \
+                       "be a RAM intensive process. This parameter is the " \
                        "number of images processed in a single transaction. " \
                        "0 means one single transaction, more fast, " \
                        "but RAM intensive, small values are nicer with " \

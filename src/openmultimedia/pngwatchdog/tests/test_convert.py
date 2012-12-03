@@ -6,13 +6,14 @@ import zope.event
 from zope.lifecycleevent import ObjectModifiedEvent
 from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
-
+from Products.CMFCore.utils import getToolByName
 from plone.app.testing import TEST_USER_NAME, TEST_USER_ID
 from plone.app.testing import login, setRoles
 
 from openmultimedia.pngwatchdog.configlet import IPNGWatchDogSettings
 from openmultimedia.pngwatchdog.testing import \
-    OPENMULTIMEDIA_PNGWATCHDOG_INTEGRATION_TESTING
+    OPENMULTIMEDIA_PNGWATCHDOG_INTEGRATION_TESTING, \
+    OPENMULTIMEDIA_PNGWATCHDOG_UNINSTALLED_INTEGRATION_TESTING
 from openmultimedia.pngwatchdog.testing import \
     generate_jpeg, generate_gif
 
@@ -86,6 +87,63 @@ class TestConvert(unittest.TestCase):
 
         im = Image.open(StringIO(self.portal['test_jpeg_image'].getImage()))
         self.assertEqual(im.format, 'PNG')
+
+        im = Image.open(StringIO(self.portal['test_gif_image'].getImage()))
+        self.assertEqual(im.format, 'GIF')
+
+    def test_unistalled(self):
+        """ Validate that our product doesn't modify images if not installed
+        """
+        login(self.portal, TEST_USER_NAME)
+        qi_tool = getToolByName(self.portal, 'portal_quickinstaller')
+        qi_tool.uninstallProducts(['openmultimedia.pngwatchdog'])
+
+        self.portal.invokeFactory('Image', 'test_jpeg_image')
+        self.portal['test_jpeg_image'].setImage(generate_jpeg(100, 100))
+        zope.event.notify(ObjectModifiedEvent(self.portal['test_jpeg_image']))
+        self.portal.invokeFactory('Image', 'test_gif_image')
+        self.portal['test_gif_image'].setImage(generate_gif(100, 100))
+        zope.event.notify(ObjectModifiedEvent(self.portal['test_gif_image']))
+
+        im = Image.open(StringIO(self.portal['test_jpeg_image'].getImage()))
+        self.assertEqual(im.format, 'JPEG')
+
+        im = Image.open(StringIO(self.portal['test_gif_image'].getImage()))
+        self.assertEqual(im.format, 'GIF')
+
+
+class TestUninstalled(unittest.TestCase):
+
+    layer = OPENMULTIMEDIA_PNGWATCHDOG_UNINSTALLED_INTEGRATION_TESTING
+
+    def setUp(self):
+        self.app = self.layer['app']
+        self.portal = self.layer['portal']
+        self.qi_tool = getToolByName(self.portal, 'portal_quickinstaller')
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+
+    def test_product_is_not_installed(self):
+        """ Validate that our products GS profile has been run and the product
+            installed
+        """
+        pid = 'openmultimedia.pngwatchdog'
+        installed = [p['id'] for p in self.qi_tool.listInstalledProducts()]
+        self.assertFalse(pid in installed)
+
+    def test_unistalled(self):
+        """ Validate that our product doesn't modify images if not installed
+        """
+        login(self.portal, TEST_USER_NAME)
+
+        self.portal.invokeFactory('Image', 'test_jpeg_image')
+        self.portal['test_jpeg_image'].setImage(generate_jpeg(100, 100))
+        zope.event.notify(ObjectModifiedEvent(self.portal['test_jpeg_image']))
+        self.portal.invokeFactory('Image', 'test_gif_image')
+        self.portal['test_gif_image'].setImage(generate_gif(100, 100))
+        zope.event.notify(ObjectModifiedEvent(self.portal['test_gif_image']))
+
+        im = Image.open(StringIO(self.portal['test_jpeg_image'].getImage()))
+        self.assertEqual(im.format, 'JPEG')
 
         im = Image.open(StringIO(self.portal['test_gif_image'].getImage()))
         self.assertEqual(im.format, 'GIF')

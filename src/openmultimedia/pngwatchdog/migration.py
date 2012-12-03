@@ -1,13 +1,7 @@
-import sys
 import logging
 import zope.event
 import time
 import transaction
-from zope.app.component.hooks import setSite
-from AccessControl.SecurityManagement import newSecurityManager
-from AccessControl.SecurityManager import setSecurityPolicy
-from Testing.makerequest import makerequest
-from Products.CMFCore.tests.base.security import PermissiveSecurityPolicy, OmnipotentUser
 from Products.CMFCore.utils import getToolByName
 from zope.lifecycleevent import ObjectModifiedEvent
 from zope.component import getUtility
@@ -37,38 +31,12 @@ def migrate_images(portal):
             portal._p_jar.cacheMinimize()
 
 
-def spoofRequest(app):
+def install_and_migrate(portal):
     """
-    Make REQUEST variable to be available on the Zope application server.
-
-    This allows acquisition to work properly
     """
-    _policy = PermissiveSecurityPolicy()
-    setSecurityPolicy(_policy)
-    newSecurityManager(None, OmnipotentUser().__of__(app.acl_users))
-    return makerequest(app)
-
-
-if 'app' in locals():
-    # Enable Faux HTTP request object
-    app = locals()['app']  # please pep8
-    app = spoofRequest(app)
-    admin = app.acl_users.getUserById("admin")
-    newSecurityManager(None, admin)
-    if len(sys.argv) == 1:
-        logger.error("missing portal name")
-    else:
-        portal_name = sys.argv[1]
-        portal = app.unrestrictedTraverse(portal_name, None)
-        if not portal:
-            logger.error("portal not found")
-        else:
-            portal.setupCurrentSkin(app.REQUEST)
-            setSite(portal)
-            qi_tool = getToolByName(portal, 'portal_quickinstaller')
-            if not 'openmultimedia.pngwatchdog' in \
-                [p['id'] for p in qi_tool.listInstalledProducts()]:
-                qi_tool.installProduct('openmultimedia.pngwatchdog')
-            getUtility(IRegistry).forInterface(IPNGWatchDogSettings).enabled = True
-            migrate_images(portal)
-            transaction.commit()
+    qi_tool = getToolByName(portal, 'portal_quickinstaller')
+    if not 'openmultimedia.pngwatchdog' in \
+        [p['id'] for p in qi_tool.listInstalledProducts()]:
+        qi_tool.installProduct('openmultimedia.pngwatchdog')
+    getUtility(IRegistry).forInterface(IPNGWatchDogSettings).enabled = True
+    migrate_images(portal)

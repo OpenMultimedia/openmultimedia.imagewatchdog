@@ -69,11 +69,16 @@ class TestConfiglet(unittest.TestCase):
         browser.addHeader('Authorization', 'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD))
         browser.open(portalURL + '/@@overview-controlpanel')
         browser.getLink('PNG WatchDog settings').click()
-        browser.getControl('Optimize PNG').selected = True
         browser.getControl('Enabled').selected = True
         browser.getControl('Save').click()
 
         # Now there is a migrate button
         browser.open(portalURL + '/@@overview-controlpanel')
         browser.getLink('PNG WatchDog settings').click()
+        browser.getControl('Optimize PNG').selected = True
         browser.getControl('Migrate').click()
+
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(IPNGWatchDogSettings)
+        self.assertTrue(settings.optimize)
+        self.assertTrue(settings.enabled)

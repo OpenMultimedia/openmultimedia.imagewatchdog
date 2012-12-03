@@ -6,13 +6,14 @@ from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
 from plone.app.testing import TEST_USER_NAME, TEST_USER_ID
 from plone.app.testing import login, setRoles
+from Products.CMFCore.utils import getToolByName
 
 from openmultimedia.pngwatchdog.configlet import IPNGWatchDogSettings
 from openmultimedia.pngwatchdog.testing import \
     OPENMULTIMEDIA_PNGWATCHDOG_FUNCTIONAL_TESTING
 from openmultimedia.pngwatchdog.testing import \
     generate_jpeg
-from openmultimedia.pngwatchdog.migration import migrate_images
+from openmultimedia.pngwatchdog.migration import migrate_images, install_and_migrate
 
 
 IMAGES_RANGE = 10
@@ -70,6 +71,18 @@ class TestConfiglet(unittest.TestCase):
         settings.threshold = 1
 
         migrate_images(self.portal)
+
+        for i in range(IMAGES_RANGE):
+            im = Image.open(StringIO(self.portal['test_jpeg_image%s' % i].getImage()))
+            self.assertEqual(im.format, 'PNG')
+
+    def test_install_and_migrate(self):
+        """ Migrate images to PNG
+        """
+        qi_tool = getToolByName(self.portal, 'portal_quickinstaller')
+        qi_tool.uninstallProducts(['openmultimedia.pngwatchdog'])
+
+        install_and_migrate(self.portal)
 
         for i in range(IMAGES_RANGE):
             im = Image.open(StringIO(self.portal['test_jpeg_image%s' % i].getImage()))

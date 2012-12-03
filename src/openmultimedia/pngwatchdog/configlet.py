@@ -34,9 +34,11 @@ class PNGWatchDogEditForm(controlpanel.RegistryEditForm):
             self.context.absolute_url(),
             self.control_panel_view))
 
-    @button.buttonAndHandler(_(u"Migrate"), name='migrate',
+    @button.buttonAndHandler(_(u"Save and Migrate"), name='migrate',
         condition=lambda enabled: bool(getUtility(IRegistry).forInterface(IPNGWatchDogSettings).enabled))
     def handleMigrate(self, action):
+        data, errors = self.extractData()
+        self.applyChanges(data)
         migrate_images(self.context)
         IStatusMessage(self.request).addStatusMessage(
             _(u"Migration done."),
