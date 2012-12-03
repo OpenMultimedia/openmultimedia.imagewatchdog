@@ -28,7 +28,7 @@ Migrate images
 ^^^^^^^^^^^^^^
 
 - First `Configure`.
-- Now in the 'PNG WatchDog' control panel you can set:
+- Now in the 'PNG WatchDog' control panel you can set::
     - 'Migration delay (milliseconds)', this parameter indicates a delay between every processed image.
         0 means no delay, more fast, but CPU intensive,
         bigger values are nicer with the CPU but will slow down the process.
