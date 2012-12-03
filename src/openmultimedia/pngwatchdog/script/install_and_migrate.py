@@ -13,6 +13,9 @@ from openmultimedia.pngwatchdog.migration import install_and_migrate
 
 
 logger = logging.getLogger('openmultimedia.pngwatchdog')
+logger.parent.setLevel(logging.INFO)
+for h in logger.parent.handlers:
+    h.setLevel(logging.INFO)
 
 
 def spoofRequest(app):
