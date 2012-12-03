@@ -1,3 +1,4 @@
+# coding: utf-8
 from setuptools import setup, find_packages
 import os
 
@@ -29,7 +30,7 @@ setup(name='openmultimedia.pngwatchdog',
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
       keywords='plone images jpeg gif png',
-      author='OpenMultimedia & Juan Pablo Gimenez',
+      author='OpenMultimedia & Juan Pablo Giménez',
       author_email='jpg@rosario.com',
       url='https://github.com/OpenMultimedia/openmultimedia.pngwatchdog',
       license='gpl',
