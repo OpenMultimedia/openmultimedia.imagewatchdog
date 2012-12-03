@@ -6,7 +6,7 @@ from openmultimedia.pngwatchdog.testing import \
     OPENMULTIMEDIA_PNGWATCHDOG_INTEGRATION_TESTING
 
 
-class TestExample(unittest.TestCase):
+class TestInstallation(unittest.TestCase):
 
     layer = OPENMULTIMEDIA_PNGWATCHDOG_INTEGRATION_TESTING
 
