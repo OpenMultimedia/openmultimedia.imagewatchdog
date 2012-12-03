@@ -27,8 +27,8 @@ Configure
 Migrate images
 ^^^^^^^^^^^^^^
 
-- First `Configure`.
-- Now in the 'PNG WatchDog' control panel you can set::
+- First `Configure`_.
+- Now in the `'PNG WatchDog' control panel`_ you can set:
     - 'Migration delay (milliseconds)', this parameter indicates a delay between every processed image.
         0 means no delay, more fast, but CPU intensive,
         bigger values are nicer with the CPU but will slow down the process.
@@ -51,12 +51,12 @@ The package includes a handy method to migrate images, sometimes prefered for ru
 Screenshots
 -----------
 
+'PNG WatchDog' control panel
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. figure:: https://github.com/OpenMultimedia/openmultimedia.pngwatchdog/raw/master/control_panel.png
     :align: center
     :height: 582px
     :width: 263px
-
-    PNG WatchDog control panel.
 
 Mostly Harmless
 ---------------
