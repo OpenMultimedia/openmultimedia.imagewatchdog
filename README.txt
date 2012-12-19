@@ -34,7 +34,7 @@ Configure
 ^^^^^^^^^
 
 - Go to 'Site Setup'.
-- Select 'PNG WatchDog'.
+- Select 'Image WatchDog'.
 - Select the files formats that should be converted to PNG.
 - You can choose to optimize the PNG file checking the 'Optimize PNG'
   checkbox.
@@ -46,7 +46,7 @@ Migrate images
 ^^^^^^^^^^^^^^
 
 - First `Configure`_.
-- Now in the `'PNG WatchDog' control panel`_ you can set:
+- Now in the `'Image WatchDog' control panel`_ you can set:
     - 'Migration delay (milliseconds)', this parameter indicates a delay
       between every processed image. 0 means no delay, more fast, but CPU
       intensive, bigger values are nicer with the CPU but will slow down the
@@ -73,7 +73,7 @@ running long processes.
 Screenshots
 -----------
 
-'PNG WatchDog' control panel
+'Image WatchDog' control panel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. figure:: https://github.com/OpenMultimedia/openmultimedia.imagewatchdog/raw/master/control_panel.png
     :align: center
