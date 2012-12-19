@@ -41,6 +41,7 @@ setup(name='openmultimedia.imagewatchdog',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'Pillow',
           'Products.CMFPlone',
       ],
       extras_require={'test': ['plone.app.testing']},
