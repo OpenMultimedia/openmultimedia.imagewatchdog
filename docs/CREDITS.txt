@@ -1,0 +1,10 @@
+Share and Enjoy
+---------------
+
+openmultimedia.pngwatchdog would not have been possible without the
+contribution of the following people:
+
+- Juan Pablo Giménez, original author
+- Héctor Velarde, factory of good ideas
+
+Development sponsored by Open Multimedia.
