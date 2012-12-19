@@ -74,7 +74,8 @@ Screenshots
 -----------
 
 'Image WatchDog' control panel
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 .. figure:: https://github.com/OpenMultimedia/openmultimedia.imagewatchdog/raw/master/control_panel.png
     :align: center
     :height: 384px
