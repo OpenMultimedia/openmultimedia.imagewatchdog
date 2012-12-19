@@ -2,7 +2,7 @@
 from zope.i18nmessageid import MessageFactory
 
 
-_ = MessageFactory('openmultimedia.pngwatchdog')
+_ = MessageFactory('openmultimedia.imagewatchdog')
 
 
 def initialize(context):

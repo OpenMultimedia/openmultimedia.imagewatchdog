@@ -9,10 +9,10 @@ from AccessControl.SecurityManager import setSecurityPolicy
 from Testing.makerequest import makerequest
 from Products.CMFCore.tests.base.security import PermissiveSecurityPolicy, \
                                                  OmnipotentUser
-from openmultimedia.pngwatchdog.migration import install_and_migrate
+from openmultimedia.imagewatchdog.migration import install_and_migrate
 
 
-logger = logging.getLogger('openmultimedia.pngwatchdog')
+logger = logging.getLogger('openmultimedia.imagewatchdog')
 logger.parent.setLevel(logging.INFO)
 for h in logger.parent.handlers:
     h.setLevel(logging.INFO)

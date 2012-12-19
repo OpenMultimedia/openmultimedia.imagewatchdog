@@ -8,12 +8,12 @@ from plone.app.testing import TEST_USER_NAME, TEST_USER_ID
 from plone.app.testing import login, setRoles
 from Products.CMFCore.utils import getToolByName
 
-from openmultimedia.pngwatchdog.configlet import IPNGWatchDogSettings
-from openmultimedia.pngwatchdog.testing import \
-    OPENMULTIMEDIA_PNGWATCHDOG_FUNCTIONAL_TESTING
-from openmultimedia.pngwatchdog.testing import \
+from openmultimedia.imagewatchdog.configlet import IImageWatchDogSettings
+from openmultimedia.imagewatchdog.testing import \
+    OPENMULTIMEDIA_IMAGEWATCHDOG_FUNCTIONAL_TESTING
+from openmultimedia.imagewatchdog.testing import \
     generate_jpeg
-from openmultimedia.pngwatchdog.migration import migrate_images, install_and_migrate
+from openmultimedia.imagewatchdog.migration import migrate_images, install_and_migrate
 
 
 IMAGES_RANGE = 10
@@ -21,7 +21,7 @@ IMAGES_RANGE = 10
 
 class TestConfiglet(unittest.TestCase):
 
-    layer = OPENMULTIMEDIA_PNGWATCHDOG_FUNCTIONAL_TESTING
+    layer = OPENMULTIMEDIA_IMAGEWATCHDOG_FUNCTIONAL_TESTING
 
     def setUp(self):
         self.app = self.layer['app']
@@ -37,7 +37,7 @@ class TestConfiglet(unittest.TestCase):
         """ Product doesn't auto-migrate on enable
         """
         registry = getUtility(IRegistry)
-        settings = registry.forInterface(IPNGWatchDogSettings)
+        settings = registry.forInterface(IImageWatchDogSettings)
         settings.enabled = True
 
         # Images are still in the original format
@@ -51,7 +51,7 @@ class TestConfiglet(unittest.TestCase):
         """ Migrate images to PNG
         """
         registry = getUtility(IRegistry)
-        settings = registry.forInterface(IPNGWatchDogSettings)
+        settings = registry.forInterface(IImageWatchDogSettings)
         settings.enabled = True
 
         migrate_images(self.portal)
@@ -66,7 +66,7 @@ class TestConfiglet(unittest.TestCase):
         """ Migrate images to PNG
         """
         registry = getUtility(IRegistry)
-        settings = registry.forInterface(IPNGWatchDogSettings)
+        settings = registry.forInterface(IImageWatchDogSettings)
         settings.enabled = True
         settings.threshold = 1
 
@@ -80,7 +80,7 @@ class TestConfiglet(unittest.TestCase):
         """ Migrate images to PNG
         """
         qi_tool = getToolByName(self.portal, 'portal_quickinstaller')
-        qi_tool.uninstallProducts(['openmultimedia.pngwatchdog'])
+        qi_tool.uninstallProducts(['openmultimedia.imagewatchdog'])
 
         install_and_migrate(self.portal)
 

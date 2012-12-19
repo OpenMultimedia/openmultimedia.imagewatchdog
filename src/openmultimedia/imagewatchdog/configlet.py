@@ -3,18 +3,18 @@ from z3c.form import button
 from Products.statusmessages.interfaces import IStatusMessage
 from plone.app.registry.browser import controlpanel
 from plone.registry.interfaces import IRegistry
-from openmultimedia.pngwatchdog import _
-from openmultimedia.pngwatchdog.migration import migrate_images
-from openmultimedia.pngwatchdog.interfaces import IPNGWatchDogSettings
+from openmultimedia.imagewatchdog import _
+from openmultimedia.imagewatchdog.migration import migrate_images
+from openmultimedia.imagewatchdog.interfaces import IImageWatchDogSettings
 
 from zope.i18nmessageid import MessageFactory
 __ = MessageFactory('plone')
 
 
-class PNGWatchDogEditForm(controlpanel.RegistryEditForm):
-    schema = IPNGWatchDogSettings
-    label = _('PNG WatchDog settings')
-    description = _('Settings to configure PNG WatchDog in Plone.')
+class ImageWatchDogEditForm(controlpanel.RegistryEditForm):
+    schema = IImageWatchDogSettings
+    label = _('Image WatchDog settings')
+    description = _('Settings to configure Image WatchDog in Plone.')
 
     @button.buttonAndHandler(__(u"Save"), name='save')
     def handleSave(self, action):
@@ -35,7 +35,7 @@ class PNGWatchDogEditForm(controlpanel.RegistryEditForm):
             self.control_panel_view))
 
     @button.buttonAndHandler(_(u"Save and Migrate"), name='migrate',
-        condition=lambda enabled: bool(getUtility(IRegistry).forInterface(IPNGWatchDogSettings).enabled))
+        condition=lambda enabled: bool(getUtility(IRegistry).forInterface(IImageWatchDogSettings).enabled))
     def handleMigrate(self, action):
         data, errors = self.extractData()
         self.applyChanges(data)
@@ -48,5 +48,5 @@ class PNGWatchDogEditForm(controlpanel.RegistryEditForm):
             self.control_panel_view))
 
 
-class PNGWatchDogControlPanel(controlpanel.ControlPanelFormWrapper):
-    form = PNGWatchDogEditForm
+class ImageWatchDogControlPanel(controlpanel.ControlPanelFormWrapper):
+    form = ImageWatchDogEditForm

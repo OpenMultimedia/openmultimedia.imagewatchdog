@@ -10,7 +10,7 @@
 SHELL = /bin/sh
 
 options = -N -q -t 3
-src = src/openmultimedia/pngwatchdog/
+src = src/openmultimedia/imagewatchdog/
 minimum_coverage = 100
 pep8_ignores = E501
 max_complexity = 12

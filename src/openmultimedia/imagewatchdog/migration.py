@@ -6,16 +6,16 @@ from Products.CMFCore.utils import getToolByName
 from zope.lifecycleevent import ObjectModifiedEvent
 from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
-from openmultimedia.pngwatchdog.interfaces import IPNGWatchDogSettings
+from openmultimedia.imagewatchdog.interfaces import IImageWatchDogSettings
 
 
-logger = logging.getLogger('openmultimedia.pngwatchdog')
+logger = logging.getLogger('openmultimedia.imagewatchdog')
 
 
 def migrate_images(portal):
     catalog = getToolByName(portal, 'portal_catalog')
     query = {'portal_type': 'Image'}
-    settings = getUtility(IRegistry).forInterface(IPNGWatchDogSettings)
+    settings = getUtility(IRegistry).forInterface(IImageWatchDogSettings)
     sleep = float(abs(settings.sleep)) / 1000
     threshold = abs(settings.threshold)
     counter = 0
@@ -35,8 +35,8 @@ def install_and_migrate(portal):
     """
     """
     qi_tool = getToolByName(portal, 'portal_quickinstaller')
-    if not 'openmultimedia.pngwatchdog' in \
+    if not 'openmultimedia.imagewatchdog' in \
         [p['id'] for p in qi_tool.listInstalledProducts()]:
-        qi_tool.installProduct('openmultimedia.pngwatchdog')
-    getUtility(IRegistry).forInterface(IPNGWatchDogSettings).enabled = True
+        qi_tool.installProduct('openmultimedia.imagewatchdog')
+    getUtility(IRegistry).forInterface(IImageWatchDogSettings).enabled = True
     migrate_images(portal)

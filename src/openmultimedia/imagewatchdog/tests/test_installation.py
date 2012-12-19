@@ -2,13 +2,13 @@ import unittest2 as unittest
 
 from Products.CMFCore.utils import getToolByName
 
-from openmultimedia.pngwatchdog.testing import \
-    OPENMULTIMEDIA_PNGWATCHDOG_INTEGRATION_TESTING
+from openmultimedia.imagewatchdog.testing import \
+    OPENMULTIMEDIA_IMAGEWATCHDOG_INTEGRATION_TESTING
 
 
 class TestInstallation(unittest.TestCase):
 
-    layer = OPENMULTIMEDIA_PNGWATCHDOG_INTEGRATION_TESTING
+    layer = OPENMULTIMEDIA_IMAGEWATCHDOG_INTEGRATION_TESTING
 
     def setUp(self):
         self.app = self.layer['app']
@@ -19,7 +19,7 @@ class TestInstallation(unittest.TestCase):
         """ Validate that our products GS profile has been run and the product
             installed
         """
-        pid = 'openmultimedia.pngwatchdog'
+        pid = 'openmultimedia.imagewatchdog'
         installed = [p['id'] for p in self.qi_tool.listInstalledProducts()]
         self.assertTrue(pid in installed,
                         'package appears not to have been installed')

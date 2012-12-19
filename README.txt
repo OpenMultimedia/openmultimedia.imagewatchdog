@@ -1,6 +1,6 @@
-**************************
-openmultimedia.pngwatchdog
-**************************
+****************************
+openmultimedia.imagewatchdog
+****************************
 
 .. contents:: Table of Contents
 
@@ -65,7 +65,7 @@ Script to migrate images
 The package includes a handy method to migrate images, sometimes prefered for
 running long processes.
 
-- From your command line run: instance run <path_to_openmultimedia.pngwatchdog_package>/openmultimedia/pngwatchdog/script/install_and_migrate.py <plone_site_name>
+- From your command line run: instance run <path_to_openmultimedia.imagewatchdog_package>/openmultimedia/imagewatchdog/script/install_and_migrate.py <plone_site_name>
 - This will install de product in the Plone site and migrate the images to PNG.
 - Get your prefered caffeinated beverage because this could take some time,
   you will see the progress of migration process in your console.
@@ -75,7 +75,7 @@ Screenshots
 
 'PNG WatchDog' control panel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. figure:: https://github.com/OpenMultimedia/openmultimedia.pngwatchdog/raw/master/control_panel.png
+.. figure:: https://github.com/OpenMultimedia/openmultimedia.imagewatchdog/raw/master/control_panel.png
     :align: center
     :height: 768px
     :width: 1366px
@@ -103,8 +103,8 @@ JPEG
 Mostly Harmless
 ---------------
 
-.. image:: https://secure.travis-ci.org/OpenMultimedia/openmultimedia.pngwatchdog.png
-    :target: http://travis-ci.org/OpenMultimedia/openmultimedia.pngwatchdog
+.. image:: https://secure.travis-ci.org/OpenMultimedia/openmultimedia.imagewatchdog.png
+    :target: http://travis-ci.org/OpenMultimedia/openmultimedia.imagewatchdog
 
 Have an idea? Found a bug? Let us know by `opening a support ticket`_.
 
@@ -113,4 +113,4 @@ Have an idea? Found a bug? Let us know by `opening a support ticket`_.
 .. _`JPEG`: https://en.wikipedia.org/wiki/JPEG
 .. _`WebP`: https://en.wikipedia.org/wiki/WebP
 .. _`Wikipedia`: https://en.wikipedia.org/wiki/Portable_Network_Graphics#Comparison_to_other_file_formats
-.. _`opening a support ticket`: https://github.com/OpenMultimedia/openmultimedia.pngwatchdog/issues
+.. _`opening a support ticket`: https://github.com/OpenMultimedia/openmultimedia.imagewatchdog/issues

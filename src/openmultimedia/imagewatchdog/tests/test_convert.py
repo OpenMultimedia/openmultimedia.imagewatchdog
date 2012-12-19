@@ -10,17 +10,17 @@ from Products.CMFCore.utils import getToolByName
 from plone.app.testing import TEST_USER_NAME, TEST_USER_ID
 from plone.app.testing import login, setRoles
 
-from openmultimedia.pngwatchdog.configlet import IPNGWatchDogSettings
-from openmultimedia.pngwatchdog.testing import \
-    OPENMULTIMEDIA_PNGWATCHDOG_INTEGRATION_TESTING, \
-    OPENMULTIMEDIA_PNGWATCHDOG_UNINSTALLED_INTEGRATION_TESTING
-from openmultimedia.pngwatchdog.testing import \
+from openmultimedia.imagewatchdog.configlet import IImageWatchDogSettings
+from openmultimedia.imagewatchdog.testing import \
+    OPENMULTIMEDIA_IMAGEWATCHDOG_INTEGRATION_TESTING, \
+    OPENMULTIMEDIA_IMAGEWATCHDOG_UNINSTALLED_INTEGRATION_TESTING
+from openmultimedia.imagewatchdog.testing import \
     generate_jpeg, generate_gif
 
 
 class TestConvert(unittest.TestCase):
 
-    layer = OPENMULTIMEDIA_PNGWATCHDOG_INTEGRATION_TESTING
+    layer = OPENMULTIMEDIA_IMAGEWATCHDOG_INTEGRATION_TESTING
 
     def setUp(self):
         self.app = self.layer['app']
@@ -32,7 +32,7 @@ class TestConvert(unittest.TestCase):
         """
         login(self.portal, TEST_USER_NAME)
         registry = getUtility(IRegistry)
-        settings = registry.forInterface(IPNGWatchDogSettings)
+        settings = registry.forInterface(IImageWatchDogSettings)
         self.assertFalse(settings.enabled)
 
         self.portal.invokeFactory('Image', 'test_jpeg_image')
@@ -53,7 +53,7 @@ class TestConvert(unittest.TestCase):
         """
         login(self.portal, TEST_USER_NAME)
         registry = getUtility(IRegistry)
-        settings = registry.forInterface(IPNGWatchDogSettings)
+        settings = registry.forInterface(IImageWatchDogSettings)
         settings.enabled = True
 
         self.portal.invokeFactory('Image', 'test_jpeg_image')
@@ -74,7 +74,7 @@ class TestConvert(unittest.TestCase):
         """
         login(self.portal, TEST_USER_NAME)
         registry = getUtility(IRegistry)
-        settings = registry.forInterface(IPNGWatchDogSettings)
+        settings = registry.forInterface(IImageWatchDogSettings)
         settings.source_formats = ['JPEG']
         settings.enabled = True
 
@@ -96,7 +96,7 @@ class TestConvert(unittest.TestCase):
         """
         login(self.portal, TEST_USER_NAME)
         qi_tool = getToolByName(self.portal, 'portal_quickinstaller')
-        qi_tool.uninstallProducts(['openmultimedia.pngwatchdog'])
+        qi_tool.uninstallProducts(['openmultimedia.imagewatchdog'])
 
         self.portal.invokeFactory('Image', 'test_jpeg_image')
         self.portal['test_jpeg_image'].setImage(generate_jpeg(100, 100))
@@ -114,7 +114,7 @@ class TestConvert(unittest.TestCase):
 
 class TestUninstalled(unittest.TestCase):
 
-    layer = OPENMULTIMEDIA_PNGWATCHDOG_UNINSTALLED_INTEGRATION_TESTING
+    layer = OPENMULTIMEDIA_IMAGEWATCHDOG_UNINSTALLED_INTEGRATION_TESTING
 
     def setUp(self):
         self.app = self.layer['app']
@@ -126,7 +126,7 @@ class TestUninstalled(unittest.TestCase):
         """ Validate that our products GS profile has been run and the product
             installed
         """
-        pid = 'openmultimedia.pngwatchdog'
+        pid = 'openmultimedia.imagewatchdog'
         installed = [p['id'] for p in self.qi_tool.listInstalledProducts()]
         self.assertFalse(pid in installed)
 

@@ -4,23 +4,23 @@
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:browser="http://namespaces.zope.org/browser"
-    i18n_domain="openmultimedia.pngwatchdog">
+    i18n_domain="openmultimedia.imagewatchdog">
 
   <includeDependencies package="." />
   <five:registerPackage package="." initialize=".initialize" />
 
   <genericsetup:registerProfile
       name="default"
-      title="openmultimedia.pngwatchdog"
+      title="openmultimedia.imagewatchdog"
       directory="profiles/default"
-      description="Installs the openmultimedia.pngwatchdog package"
+      description="Installs the openmultimedia.imagewatchdog package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
   <browser:page
-      name="pngwatchdog-controlpanel"
+      name="imagewatchdog-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".configlet.PNGWatchDogControlPanel"
+      class=".configlet.ImageWatchDogControlPanel"
       permission="cmf.ManagePortal"
       />
 

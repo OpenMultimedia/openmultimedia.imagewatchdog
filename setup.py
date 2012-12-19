@@ -10,7 +10,7 @@ long_description = open("README.txt").read() + "\n" + \
                    open(os.path.join("docs", "CREDITS.txt")).read() + "\n" + \
                    open(os.path.join("docs", "HISTORY.txt")).read()
 
-setup(name='openmultimedia.pngwatchdog',
+setup(name='openmultimedia.imagewatchdog',
       version=version,
       description=description,
       long_description=long_description,
@@ -32,7 +32,7 @@ setup(name='openmultimedia.pngwatchdog',
       keywords='plone images jpeg gif png',
       author='Juan Pablo Giménez',
       author_email='jpg@rosario.com',
-      url='https://github.com/OpenMultimedia/openmultimedia.pngwatchdog',
+      url='https://github.com/OpenMultimedia/openmultimedia.imagewatchdog',
       license='GPLv2',
       packages=find_packages('src'),
       package_dir={'': 'src'},
