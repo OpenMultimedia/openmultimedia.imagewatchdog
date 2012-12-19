@@ -7,8 +7,10 @@ from zope.app.component.hooks import setSite
 from AccessControl.SecurityManagement import newSecurityManager
 from AccessControl.SecurityManager import setSecurityPolicy
 from Testing.makerequest import makerequest
-from Products.CMFCore.tests.base.security import PermissiveSecurityPolicy, \
-                                                 OmnipotentUser
+from Products.CMFCore.tests.base.security import (
+    PermissiveSecurityPolicy,
+    OmnipotentUser
+)
 from openmultimedia.imagewatchdog.migration import install_and_migrate
 
 

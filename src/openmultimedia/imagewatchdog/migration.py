@@ -35,8 +35,8 @@ def install_and_migrate(portal):
     """
     """
     qi_tool = getToolByName(portal, 'portal_quickinstaller')
-    if not 'openmultimedia.imagewatchdog' in \
-        [p['id'] for p in qi_tool.listInstalledProducts()]:
+    installed_products = [p['id'] for p in qi_tool.listInstalledProducts()]
+    if not 'openmultimedia.imagewatchdog' in installed_products:
         qi_tool.installProduct('openmultimedia.imagewatchdog')
     getUtility(IRegistry).forInterface(IImageWatchDogSettings).enabled = True
     migrate_images(portal)

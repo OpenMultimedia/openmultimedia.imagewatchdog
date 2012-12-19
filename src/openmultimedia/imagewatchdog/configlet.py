@@ -34,7 +34,9 @@ class ImageWatchDogEditForm(controlpanel.RegistryEditForm):
             self.context.absolute_url(),
             self.control_panel_view))
 
-    @button.buttonAndHandler(_(u"Save and Migrate"), name='migrate',
+    @button.buttonAndHandler(
+        _(u"Save and Migrate"),
+        name='migrate',
         condition=lambda enabled: bool(getUtility(IRegistry).forInterface(IImageWatchDogSettings).enabled))
     def handleMigrate(self, action):
         data, errors = self.extractData()

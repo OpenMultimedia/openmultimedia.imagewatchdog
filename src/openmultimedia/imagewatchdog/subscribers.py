@@ -16,8 +16,7 @@ def image_convert(context, event):
     if not settings or not settings.enabled:
         return
     im = Image.open(StringIO(orig))
-    if im.format == 'PNG' or \
-       im.format not in settings.source_formats:
+    if im.format == 'PNG' or im.format not in settings.source_formats:
         return
     output = StringIO()
     im.save(output, format='PNG', optimize=settings.optimize)

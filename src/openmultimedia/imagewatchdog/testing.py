@@ -32,13 +32,6 @@ class OpenmultimediaimagewatchdogLayer(PloneSandboxLayer):
         import openmultimedia.imagewatchdog
         xmlconfig.file('configure.zcml', openmultimedia.imagewatchdog, context=configurationContext)
 
-        # Install products that use an old-style initialize() function
-        #z2.installProduct(app, 'Products.PloneFormGen')
-
-#    def tearDownZope(self, app):
-#        # Uninstall products installed above
-#        z2.uninstallProduct(app, 'Products.PloneFormGen')
-
     def setUpPloneSite(self, portal):
         applyProfile(portal, 'openmultimedia.imagewatchdog:default')
 
@@ -58,9 +51,12 @@ class OpenmultimediaimagewatchdogUnistalledLayer(PloneSandboxLayer):
 
 OPENMULTIMEDIA_IMAGEWATCHDOG_FIXTURE = OpenmultimediaimagewatchdogLayer()
 OPENMULTIMEDIA_IMAGEWATCHDOG_UNINSTALLED_FIXTURE = OpenmultimediaimagewatchdogUnistalledLayer()
-OPENMULTIMEDIA_IMAGEWATCHDOG_INTEGRATION_TESTING = IntegrationTesting(bases=(OPENMULTIMEDIA_IMAGEWATCHDOG_FIXTURE,),
-                                                                    name="OpenmultimediaimagewatchdogLayer:Integration")
-OPENMULTIMEDIA_IMAGEWATCHDOG_UNINSTALLED_INTEGRATION_TESTING = IntegrationTesting(bases=(OPENMULTIMEDIA_IMAGEWATCHDOG_UNINSTALLED_FIXTURE,),
-                                                                                name="OpenmultimediaimagewatchdogLayer:UninstalledIntegration")
-OPENMULTIMEDIA_IMAGEWATCHDOG_FUNCTIONAL_TESTING = FunctionalTesting(bases=(OPENMULTIMEDIA_IMAGEWATCHDOG_FIXTURE,),
-                                                                  name="OpenmultimediaimagewatchdogLayer:Functional")
+OPENMULTIMEDIA_IMAGEWATCHDOG_INTEGRATION_TESTING = IntegrationTesting(
+    bases=(OPENMULTIMEDIA_IMAGEWATCHDOG_FIXTURE,),
+    name="OpenmultimediaimagewatchdogLayer:Integration")
+OPENMULTIMEDIA_IMAGEWATCHDOG_UNINSTALLED_INTEGRATION_TESTING = IntegrationTesting(
+    bases=(OPENMULTIMEDIA_IMAGEWATCHDOG_UNINSTALLED_FIXTURE,),
+    name="OpenmultimediaimagewatchdogLayer:UninstalledIntegration")
+OPENMULTIMEDIA_IMAGEWATCHDOG_FUNCTIONAL_TESTING = FunctionalTesting(
+    bases=(OPENMULTIMEDIA_IMAGEWATCHDOG_FIXTURE,),
+    name="OpenmultimediaimagewatchdogLayer:Functional")
