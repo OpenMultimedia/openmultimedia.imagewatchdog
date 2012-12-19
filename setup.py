@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.1'
+version = '1.0b1'
 description = "A package to convert every image stored and uploaded to a \
 Plone site to PNG format."
 long_description = open("README.txt").read() + "\n" + \
