@@ -77,8 +77,8 @@ Screenshots
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. figure:: https://github.com/OpenMultimedia/openmultimedia.imagewatchdog/raw/master/control_panel.png
     :align: center
-    :height: 768px
-    :width: 1366px
+    :height: 384px
+    :width: 683px
 
 Comparison to other file formats
 --------------------------------
